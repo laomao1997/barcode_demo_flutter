@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'dart:async';
 import '../config/service_url.dart';
+import 'dart:convert';
 
 // 获取商品的信息
 Future request(barcode) async{
@@ -11,14 +12,13 @@ Future request(barcode) async{
     String barCode=barcode.toString();
     var data={"barcode":barCode};
     print(data);
-    response=await dio.get("http://www.mxnzp.com/api/barcode/goods/details",queryParameters: data);
-    print(response.data['code']);
-    if(response.data['code']==1){
-      print(response.data['data']);
-      return response.data['data'];
-    }else{
-      throw Exception('后端端口异常');
-    }
+    response=await dio.get(servicePath["getBookInfoByISBN"] + barCode);
+    print(response.data['title']);
+    print(response.toString());
+    JsonDecoder decoder = new JsonDecoder();
+    Map<String, dynamic> decoded = decoder.convert(response.toString());
+    print(decoded['title']);
+    return decoded;
   } catch (e) {
     return print('ERROR:=========>${e}');
   }

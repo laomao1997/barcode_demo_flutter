@@ -11,7 +11,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String barcode = null;
+  String barcode;
 
   @override
   initState() {
@@ -73,10 +73,6 @@ class _MyAppState extends State<MyApp> {
       } else {
         setState(() => this.barcode = 'Unknown error: $e');
       }
-    } on FormatException {
-      setState(() => this.barcode = 'null (User returned using the "back"-button before scanning anything. Result)');
-    } catch (e) {
-      setState(() => this.barcode = 'Unknown error: $e');
     }
   }
 }
@@ -84,7 +80,7 @@ class _MyAppState extends State<MyApp> {
 class ProjectMessage extends StatelessWidget {
   final Map projectItem;
 
-  const ProjectMessage({Key key,this.projectItem}) : super(key: key);
+  ProjectMessage({Key key,this.projectItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,15 +90,17 @@ class ProjectMessage extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title:new Text('书名',style: TextStyle(fontWeight: FontWeight.w500),),
-              subtitle: new Text(projectItem['goodsName']),
+              subtitle: new Text(projectItem['title']),
               leading: new Icon(Icons.account_box,color: Colors.lightBlue,),
             ),
             new Divider(),
             ListTile(
               title:new Text('出版社',style: TextStyle(fontWeight: FontWeight.w500),),
-              subtitle: new Text(projectItem['supplier']),
+              subtitle: new Text(projectItem['publisher']),
               leading: new Icon(Icons.account_box,color: Colors.lightBlue,),
             ),
+            new Divider(),
+            new Image.network(projectItem['image'])
           ],
         ),
       ),
