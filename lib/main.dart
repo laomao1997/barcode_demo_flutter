@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
       String barcode = await scanner.scan();
       setState(() => this.barcode = barcode);
     } on Exception catch (e) {
-      if (e == scanner.CameraAccessDenied) {
+      if (e.toString() == scanner.CameraAccessDenied) {
         setState(() {
           this.barcode = 'The user did not grant the camera permission!';
         });
@@ -105,11 +105,11 @@ class ProjectMessage extends StatelessWidget {
             height: 100.0, //设置图片的高
             width: 100.0, //设置图片的宽
             fit: BoxFit.fitHeight,
-            //BoxFit.fill  全图显示，显示可能拉伸或者充满
-            //BoxFit.contain  全图显示 显示原比例，不需充满
-            //BoxFit.cover 显示可能拉伸可能剪裁充满  BoxFit.fitWidth显示可能拉伸可能剪裁，宽度充满
-            //BoxFit.fitHeight 显示可能拉伸可能充满，高度充满
-            //BoxFit.scaleDown  效果和contain差不多,但是此属性不允许显示超过源图片大小，可小不可大
+            // BoxFit.fill  全图显示，显示可能拉伸或者充满
+            // BoxFit.contain  全图显示 显示原比例，不需充满
+            // BoxFit.cover 显示可能拉伸可能剪裁充满  BoxFit.fitWidth显示可能拉伸可能剪裁，宽度充满
+            // BoxFit.fitHeight 显示可能拉伸可能充满，高度充满
+            // BoxFit.scaleDown  效果和contain差不多,但是此属性不允许显示超过源图片大小，可小不可大
             alignment: Alignment.center, //可以控制实际图片在容器内的位置
           ),
           new Divider(),
@@ -131,7 +131,7 @@ class ProjectMessage extends StatelessWidget {
           new Divider(),
           new ListTile(
             title: new Text(
-              '内容',
+              '目录',
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
             subtitle: new Text(projectItem['catalog']),
