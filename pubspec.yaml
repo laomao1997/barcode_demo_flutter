@@ -28,7 +28,7 @@ dependencies:
   # 图片选择控件
   image_picker: ^0.6.1+8
   # http 请求库
-  dio: ^3.0.0
+  dio: ">=3.0.0 <6.0.0"
 
 dev_dependencies:
   flutter_test:
